@@ -49,16 +49,23 @@
                     width: 100%;
                 }
             }
+            ul {
+                text-align: left;
+            }
         </style>
     </head>
     <body>
         <div class="header">
-            <h2>Linguine Coin</h2>
+            <h1>Linguine Coin</h1>
         </div>
         <div class="header" id="hide">
             <input type="email" placeholder="Email" id="email">
             <input type="password" placeholder="Password" id="password">
             <button onclick="signMeIn()">Login</button>
+        </div>
+        <div class="header" id="hidden" style="display: none">
+            <h2>Your Account</h2>
+            <p id="linguine-coins-my">Linguine Coins</p>
         </div>
         <div class="row" id="row">
             <div class="column" style="background-color:#aaa;" id="luke-div">
@@ -76,110 +83,110 @@
                 <h1>Eamon</h1>
                 <h4 id="eamon-coins">Loading...</h4>
                 <p>gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="eamon-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="eamon-for">
+                <button onclick="toEamon()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="nathan-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Nathan</h1>
                 <h4 id="nathan-coins">Loading...</h4>
                 <p>V9dkluL27TXX2xeAYKRAmULEWvS2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="nathan-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="nathan-for">
+                <button onclick="toNathan()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="paul-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Paul</h1>
                 <h4 id="paul-coins">Loading...</h4>
                 <p>Sfe4CqdALEZq2oqgyEHb3KousEJ2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="paul-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="paul-for">
+                <button onclick="toPaul()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="jason-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Jason</h1>
                 <h4 id="jason-coins">Loading...</h4>
                 <p>Nu3BMirKtKUziXS3nhDLtJraxOz1</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="jason-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="jason-for">
+                <button onclick="toJason()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="gavin-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Gavin Z</h1>
                 <h4 id="gavin-coins">Loading...</h4>
                 <p>Y6Gda6VmfmXewW2IWg7r4KXVE4M2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="gavin-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="gavin-for">
+                <button onclick="toGavin()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="chance-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Chance</h1>
                 <h4 id="chance-coins">Loading...</h4>
                 <p>X91iiHJqAucY1cAGhoCTo3Tq1ch1</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="chance-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="chance-for">
+                <button onclick="toChance()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa;" id="carson-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Carson</h1>
                 <h4 id="carson-coins">Loading...</h4>
                 <p>L9oJ18itmrOXOAi4vhf6ahDHhHw1</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="carson-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="carson-for">
+                <button onclick="toCarson()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa" id="luke-V-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Luke V</h1>
                 <h4 id="luke-V-coins">Loading...</h4>
                 <p>C1Scy9IyO5On0iVmzBkcoiyFDlb2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="luke-V-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="luke-V-for">
+                <button onclick="toLukeV()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa" id="gavin-R-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Gavin R</h1>
                 <h4 id="gavin-R-coins">Loading...</h4>
                 <p>fvztzfsKtgRnDCqrtrwbqv1uDJZ2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="gavin-R-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="gavin-R-for">
+                <button onclick="toGavinR()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Tyler</h1>
                 <h4 id="tyler-coins">Loading...</h4>
                 <p>j8h8tvQktlPmx4VioSplYmdpPmI2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="tyler-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="tyler-for">
+                <button onclick="toTyler()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Liam</h1>
                 <h4 id="liam-coins">Loading...</h4>
                 <p>gnqvhAXj6YgCwmOlErvwEMtLAHX2</p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="liam-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="liam-for">
+                <button onclick="toLiam()">Transfer</button>
             </div>
             <div class="column" style="background-color:#aaa">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
@@ -191,17 +198,17 @@
                 <input type="text" placeholder="For">
                 <button>Transfer</button>
             </div>
-            <div class="column" style="background-color:#aaa">
+            <div class="column" style="background-color:#aaa" id="niko-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Niko</h1>
                 <h4 id="niko-coins">Loading...</h4>
-                <p></p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <p>DC2R4iIL67fkA6MrWubB3OOG0lS2</p>
+                <input type="number" placeholder="Number of Coins" min="0" id="niko-number">
                 <br>
-                <input type="text" placeholder="For">
-                <button>Transfer</button>
+                <input type="text" placeholder="For" id="niko-for">
+                <button onclick="toNiko()">Transfer</button>
             </div>
-            <div class="column" style="background-color:#aaa">
+            <!--<div class="column" style="background-color:#aaa">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Armando</h1>
                 <h4 id="armando-coins">Loading...</h4>
@@ -210,11 +217,21 @@
                 <br>
                 <input type="text" placeholder="For">
                 <button>Transfer</button>
-            </div>
-            <div class="column" style="background-color:#aaa">
+            </div>!-->
+            <div class="column" style="background-color:#aaa" id="jacob-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Jacob</h1>
                 <h4 id="jacob-coins">Loading...</h4>
+                <p>wzRqMSjNwqOtfk49jP849GCIYn63</p>
+                <input type="number" placeholder="Number of Coins" min="0" id="jacob-number">
+                <br>
+                <input type="text" placeholder="For" id="jacob-for">
+                <button onclick="toJacob()">Transfer</button>
+            </div>
+            <div class="column" style="background-color:#aaa">
+                <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
+                <h1>Mr. Heggan</h1>
+                <h4 id="heggan-coins">Loading...</h4>
                 <p></p>
                 <input type="number" placeholder="Number of Coins" min="0">
                 <br>
@@ -223,13 +240,8 @@
             </div>
         </div>
         <div class="footer">
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+            <h1>Latest Transfer</h1>
+            <p id="li1" style="text-align: center"></p>
         </div>
     </body>
     <script src="index.js"></script>
