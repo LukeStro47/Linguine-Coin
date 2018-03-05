@@ -22,9 +22,6 @@ function signMeIn() {
         document.getElementById('hide').style.display = 'none';
     });
 }
-firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').push({
-    coins: 1000
-});
 firebase.database().ref().once('value').then(function(snapshot) {
     updatesList = snapshot.val() || 'Anonymous';
     document.getElementById('li1').innerHTML = updatesList.Recents.update;
