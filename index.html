@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+        <link rel="stylesheet" href="index.css">
         <style>
             * {
                 box-sizing: border-box;
@@ -152,6 +153,16 @@
                 <input type="text" placeholder="For" id="carson-for">
                 <button onclick="toCarson()">Transfer</button>
             </div>
+            <div class="column" style="background-color:#aaa" id="jackie-div">
+                <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
+                <h1>Jackie</h1>
+                <h4 id="jackie-coins">Loading...</h4>
+                <p>Qjn14k2LUYaYYrIxAQlZkRVa6fC3</p>
+                <input type="number" placeholder="Number of Coins" min="0" id="jackie-number">
+                <br>
+                <input type="text" placeholder="For" id="jackie-for">
+                <button onclick="toJackie()">Transfer</button>
+            </div>
             <div class="column" style="background-color:#aaa" id="luke-V-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Luke V</h1>
@@ -252,9 +263,17 @@
             <div>
                 <h2>Minute Maid 2 Liter Bottle of Fruit Punch</h2>
                 <img src="https://www.minutemaid.com/content/dam/minutemaid/hero/FruitPunch_2LBottle_Hero.png" style="display: block; margin: 0 auto; width: 10%; height: auto;">
-                <input type="text" placeholder="Price">
-                <button>Submit</button>
+                <button style="display: block; margin: 0 auto;" id="myBtn">Guess</button>
             </div>
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <input type="number">
+            </div>
+
         </div>
     </body>
     <script src="index.js"></script>

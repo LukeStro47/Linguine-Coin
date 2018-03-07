@@ -26,6 +26,26 @@ firebase.database().ref().once('value').then(function(snapshot) {
     updatesList = snapshot.val() || 'Anonymous';
     document.getElementById('li1').innerHTML = updatesList.Recents.update;
 });
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
     document.getElementById('luke-coins').innerHTML = oldUser.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins.toString() + ' Linguine Coins';
@@ -42,6 +62,7 @@ firebase.database().ref('Users').once('value').then(function(snapshot) {
     document.getElementById('liam-coins').innerHTML = oldUser.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins.toString() + ' Linguine Coins';
     document.getElementById('niko-coins').innerHTML = oldUser.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins.toString() + ' Linguine Coins';
     document.getElementById('jacob-coins').innerHTML = oldUser.wzRqMSjNwqOtfk49jP849GCIYn63.coins.toString() + ' Linguine Coins';
+    document.getElementById('jackie-coins').innerHTML = oldUser.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins.toString() + ' Linguine Coins';
 });
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
@@ -93,6 +114,8 @@ function checkForUser() {
         document.getElementById('niko-div').style.display = 'none';
 	} else if(currentUserId == 'wzRqMSjNwqOtfk49jP849GCIYn63') {
         document.getElementById('jacob-div').style.display = 'none';
+    } else if(currentUserId == 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3') {
+        document.getElementById('jackie-div').style.display = 'none';
     }
 }
 function toLuke() {
@@ -562,6 +585,40 @@ function toJacob() {
             });
         });
         var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jacob for " + forDescription + ".";
+        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+            updates = snapshot.val() || 'Anonymous';
+            firebase.database().ref('Recents/').set({
+                update: stringForDescription
+            });
+        });
+        location.reload();
+    }
+}
+function toJackie() {
+	var currentUserId = firebase.auth().currentUser.uid;
+	var lukesCoins = oldUser.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins;
+    var forDescription = document.getElementById('jackie-for').value;
+	var newAmount = parseInt(document.getElementById('jackie-number').value);
+	var setUserTo = lukesCoins + newAmount;
+	var setUserFrom;
+	var currentUserCoins;
+    var updates;
+	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+            setUserFrom = snapshot.val().coins || 'Anonymous';
+        });
+		//Add to Luke
+		firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+			coins: setUserTo
+		});
+        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+            var currentCoins = currentUserCoins - newAmount;
+            firebase.database().ref('Users/' + currentUserId).set({
+                coins: currentCoins
+            });
+        });
+        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jackie for " + forDescription + ".";
         firebase.database().ref('Recents/').once('value').then(function(snapshot) {
             updates = snapshot.val() || 'Anonymous';
             firebase.database().ref('Recents/').set({
