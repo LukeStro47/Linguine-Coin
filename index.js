@@ -12,6 +12,7 @@ var newUser;
 var currentUserId;
 var inputs;
 var updatesList;
+var duoy;
 function signMeIn() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -46,6 +47,25 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+firebase.database().ref('NCAA').once('value').then(function(snapshot) {
+    oldUser = snapshot.val().pot || 'Anonymous';
+    document.getElementById('currentPot').innerHTML = 'Current Pot: ' + oldUser.toString() + ' Linguine Coins';
+});
+firebase.database().ref().once('value').then(function(snapshot) {
+    oldUser = snapshot.val() || 'Anonymous';
+    if(oldUser.Pot != null) {
+        if(oldUser.Pot.password == null) {
+            document.getElementById('pot').style.display = "none";
+            document.getElementById('potTwo').style.display = "block";
+            document.getElementById('pot-name-two').innerHTML = olduser.Pot.potName;
+            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + olduser.PotCoins.pot.toString() + ' Linguine Coins';
+        } else {
+            document.getElementById('pot').style.display = "none";
+            document.getElementById('potThree').style.display = "block";
+            document.getElementById('pot-name-three').innerHTML = "Join Private Pot With Password";
+        }
+    }
+});
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
     document.getElementById('luke-coins').innerHTML = oldUser.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins.toString() + ' Linguine Coins';
@@ -73,11 +93,27 @@ firebase.auth().onAuthStateChanged(function(user) {
             newUser = snapshot.val() || 'Anonymous';
             document.getElementById('linguine-coins-my').innerHTML = newUser.coins.toString() + ' Linguine Coins';
         });
-                checkForUser();
+        checkForUser();
+        startPotCheck();
 	} else {
 		// User is signed out.
 	}
 });
+function startPotCheck() {
+    firebase.database().ref().once('value').then(function(snapshot) {
+        var duoyTwo = snapshot.val() || 'Anonymous';
+        firebase.database('PotPlayers/' + firebase.auth().currentUser.uid).ref().once('value').then(function(snapshot) {
+            duoy = snapshot.val() || 'Anonymous';
+            if(duoy.joined == true) {
+                document.getElementById('pot').style.display = "none";
+                document.getElementById('potThree').style.display = "none";
+                document.getElementById('potTwo').style.display = "block";
+                document.getElementById('pot-name-two').innerHTML = duoyTwo.Pot.potName;
+                document.getElementById('pot-total').innerHTML = 'Current Pot: ' + duoyTwo.PotCoins.pot.toString() + ' Linguine Coins';
+            }
+        });
+    });
+}
 /*firebase.database().ref('').set({
         
 });*/
@@ -596,7 +632,7 @@ function toJacob() {
 }
 function toJackie() {
 	var currentUserId = firebase.auth().currentUser.uid;
-	var lukesCoins = oldUser.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins;
+    var lukesCoins = oldUser.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins;
     var forDescription = document.getElementById('jackie-for').value;
 	var newAmount = parseInt(document.getElementById('jackie-number').value);
 	var setUserTo = lukesCoins + newAmount;
@@ -627,4 +663,110 @@ function toJackie() {
         });
         location.reload();
     }
+}
+function toDatabase() {
+    firebase.database().ref('Price is Right/' + firebase.auth().currentUser.uid).set({
+        guess: document.getElementById('modalInput').value
+    });
+    modal.style.display = "none";
+}
+function runJoinNCAA() {
+    var goat;
+    var goatCoins;
+    var save;
+    var saveDis;
+    firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+        saveDis = snapshot.val() || 'Anonymous';
+        console.log(saveDis);
+        if(saveDis.signedUp == null) {
+            firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+                goat = snapshot.val() || 'Anonymous';
+                firebase.database().ref('NCAA/').once('value').then(function(snapshot) {
+                    goatCoins = snapshot.val();
+                    var remember = goatCoins.pot;
+                    var final = remember + 20;
+                    firebase.database().ref('NCAA').set({
+                        pot: final
+                    });
+                });
+                firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).set({
+                    signedUp: true
+                });
+                firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                    coins: goat.coins - 20
+                });
+                location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
+            });
+        } else {
+            alert("You have already signed up. Redirecting you to the bracket page now.");
+            location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
+        }
+    });
+}
+function createPot() {
+    var potName = document.getElementById('pot-name').value;
+    if(document.getElementById('pot-password').value != "" || document.getElementById('pot-password').value != null) {
+        var potPassword = document.getElementById('pot-password').value;
+    }
+    var potCoins = parseInt(document.getElementById('pot-coins').value);
+    var goAt;
+    var goAtCoins;
+    firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+        goAt = snapshot.val() || 'Anonymous';
+        //firebase.database().ref('Pot/' + 'Coins').once('value').then(function(snapshot) {
+            //goAtCoins = snapshot.val();
+            //var remember = goAtCoins.pot;
+            //var final = remember + potCoins.parseInt();
+        //});
+        if(potPassword == null && potCoins > 0) {
+            firebase.database().ref('Pot/').set({
+                creator: firebase.auth().currentUser.uid,
+                potName: potName,
+                coinsEntry: potCoins
+            });
+        } else if(potPassword != null && potCoins > 0) {
+            firebase.database().ref('Pot/').set({
+                creator: firebase.auth().currentUser.uid,
+                potName: potName,
+                coinsEntry: potCoins,
+                password: potPassword
+            });
+        }
+        firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+            coins: goAt.coins - potCoins
+        });
+    });
+    firebase.database().ref('Pot' + 'Coins').set({
+        pot: potCoins
+    });
+}
+function potPassword() {
+    var inputPass = document.getElementById('pot-pass').value;
+    var save;
+    var saveInput;
+    firebase.database().ref().once('value').then(function(snapshot) {
+        save = snapshot.val();
+        var saveEntry = save.PotCoins.pot + save.Pot.coinsEntry;
+        if(inputPass == save.Pot.password) {
+            document.getElementById('pot').style.display = "none";
+            document.getElementById('potThree').style.display = "none";
+            document.getElementById('potTwo').style.display = "block";
+            document.getElementById('pot-name-two').innerHTML = save.Pot.potName;
+            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + save.PotCoins.pot.toString() + ' Linguine Coins';
+            firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
+                joined: true
+            });
+            firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+                saveInput = snapshot.val();
+                firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                    coins: saveInput.coins - save.Pot.coinsEntry
+                });
+            });
+            firebase.database().ref('PotCoins').set({
+                pot: saveEntry
+            });
+        } else {
+            alert("Wrong Password");
+        }
+    });
 }

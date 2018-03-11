@@ -259,7 +259,7 @@
             <p id="li1" style="text-align: center"></p>
         </div>
         <div style="padding: 30px;">
-            <h1 style="text-align: center;">The Price is Right - Weekly Contest</h1>
+            <h1 style="text-align: center;">The Price is Right - Weekly Contest (Ends 3/10)</h1>
             <div>
                 <h2>Minute Maid 2 Liter Bottle of Fruit Punch</h2>
                 <img src="https://www.minutemaid.com/content/dam/minutemaid/hero/FruitPunch_2LBottle_Hero.png" style="display: block; margin: 0 auto; width: 10%; height: auto;">
@@ -271,9 +271,34 @@
 
             <!-- Modal content -->
             <div class="modal-content">
-                <input type="number">
+                <h1>Guess</h1>
+                $<input type="number" id="modalInput">
+                <button onclick="toDatabase()">Submit</button>
             </div>
 
+        </div>
+        <div id="pot">
+            <h1 style="text-align: center">Make a Pot</h1>
+            <input type="text" placeholder="Name of Pot" id="pot-name">
+            <input type="password" placeholder="Password (If Needed For Private Pot)" id="pot-password">
+            <input type="number" placeholder="Coins Per Entry" id="pot-coins">
+            <br>
+            <button onclick="createPot()" style="display: block; margin: 0 auto;">Create</button>
+        </div>
+        <div id="potTwo" style="display: none">
+            <h1 id="pot-name-two" style="text-align: center">Current Pot Name</h1>
+            <h2 id="pot-total" style="text-align: center">Current Pot Total</h2>
+        </div>
+        <div id="potThree" style="display: none">
+            <h1 id="pot-name-three" style="text-align: center">Pot Name</h1>
+            <input id="pot-pass" style="display: block; margin: 0 auto;" type="password" placeholder="Pot Password">
+            <br>
+            <button style="display: block; margin: 0 auto" onclick="potPassword()">Submit</button>
+        </div>
+        <div id="ncaa">
+            <h1 style="text-align: center;"><a href="" style="color: darkblue; text-decoration: none;">NCAA Competition</a></h1>
+            <h2 style="text-align: center;" id="currentPot">Current Pot Loading...</h2>
+            <button onclick="runJoinNCAA()" style="display: block; margin: 0 auto;">Join For 20 Coins</button>
         </div>
     </body>
     <script src="index.js"></script>
