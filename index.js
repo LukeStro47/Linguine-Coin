@@ -13,6 +13,10 @@ var currentUserId;
 var inputs;
 var updatesList;
 var duoy;
+var checkTwso;
+var duoyTwo;
+var competitors;
+//var onlineUser = firebase.auth().currentUser.uid;
 function signMeIn() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -51,19 +55,31 @@ firebase.database().ref('NCAA').once('value').then(function(snapshot) {
     oldUser = snapshot.val().pot || 'Anonymous';
     document.getElementById('currentPot').innerHTML = 'Current Pot: ' + oldUser.toString() + ' Linguine Coins';
 });
+function checkNCAA() {
+    firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+        competitors = snapshot.val() || 'Anonymous';
+        if(competitors.signedUp == true) {
+            document.getElementById('joinNCAA').style.display = "none";
+            document.getElementById('joinNCAAR').style.display = "block";
+        }
+    });
+}
 firebase.database().ref().once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
     if(oldUser.Pot != null) {
         if(oldUser.Pot.password == null) {
             document.getElementById('pot').style.display = "none";
             document.getElementById('potTwo').style.display = "block";
-            document.getElementById('pot-name-two').innerHTML = olduser.Pot.potName;
-            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + olduser.PotCoins.pot.toString() + ' Linguine Coins';
+            document.getElementById('pot-name-two').innerHTML = oldUser.Pot.potName;
+            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + oldUser.PotCoins.pot.toString() + ' Linguine Coins';
         } else {
             document.getElementById('pot').style.display = "none";
             document.getElementById('potThree').style.display = "block";
             document.getElementById('pot-name-three').innerHTML = "Join Private Pot With Password";
         }
+    } else {
+        document.getElementById('pot').style.display = "block";
+        document.getElementById('potThree').style.display = "none";
     }
 });
 firebase.database().ref('Users').once('value').then(function(snapshot) {
@@ -95,24 +111,41 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
         checkForUser();
         startPotCheck();
+        checkNCAA();
 	} else {
 		// User is signed out.
 	}
 });
 function startPotCheck() {
     firebase.database().ref().once('value').then(function(snapshot) {
-        var duoyTwo = snapshot.val() || 'Anonymous';
-        firebase.database('PotPlayers/' + firebase.auth().currentUser.uid).ref().once('value').then(function(snapshot) {
-            duoy = snapshot.val() || 'Anonymous';
-            if(duoy.joined == true) {
-                document.getElementById('pot').style.display = "none";
-                document.getElementById('potThree').style.display = "none";
-                document.getElementById('potTwo').style.display = "block";
-                document.getElementById('pot-name-two').innerHTML = duoyTwo.Pot.potName;
-                document.getElementById('pot-total').innerHTML = 'Current Pot: ' + duoyTwo.PotCoins.pot.toString() + ' Linguine Coins';
-            }
-        });
+        duoyTwo = snapshot.val() || 'Anonymous';
+        checkTwo();
+        checkThree();
     });
+}
+function checkTwo() {
+    firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+        checkTwso = snapshot.val() || 'Anonymous';
+        if(checkTwso.joined == true) {
+            document.getElementById('pot').style.display = "none";
+            document.getElementById('potThree').style.display = "none";
+            document.getElementById('potTwo').style.display = "block";
+            document.getElementById('pot-name-two').innerHTML = duoyTwo.Pot.potName;
+            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + duoyTwo.PotCoins.pot.toString() + ' Linguine Coins';
+        }
+    });
+}
+function checkThree() {
+    if(duoyTwo.Pot.creator == firebase.auth().currentUser.uid) {
+        console.log("sDope");
+        document.getElementById('pot').style.display = "none";
+        document.getElementById('potThree').style.display = "none";
+        document.getElementById('potTwo').style.display = "block";
+        document.getElementById('hide-input').style.display = "block";
+        document.getElementById('hide-button').style.display = "block";
+        document.getElementById('pot-name-two').innerHTML = duoyTwo.Pot.potName;
+        document.getElementById('pot-total').innerHTML = 'Current Pot: ' + duoyTwo.PotCoins.pot.toString() + ' Linguine Coins';
+    }
 }
 /*firebase.database().ref('').set({
         
@@ -704,9 +737,14 @@ function runJoinNCAA() {
     });
 }
 function createPot() {
+    var potPassword;
     var potName = document.getElementById('pot-name').value;
+    var check = false;
     if(document.getElementById('pot-password').value != "" || document.getElementById('pot-password').value != null) {
-        var potPassword = document.getElementById('pot-password').value;
+        potPassword = document.getElementById('pot-password').value;
+        if(potPassword == "") {
+            check = true;
+        }
     }
     var potCoins = parseInt(document.getElementById('pot-coins').value);
     var goAt;
@@ -718,13 +756,13 @@ function createPot() {
             //var remember = goAtCoins.pot;
             //var final = remember + potCoins.parseInt();
         //});
-        if(potPassword == null && potCoins > 0) {
+        if(potCoins > 0 && check == true) {
             firebase.database().ref('Pot/').set({
                 creator: firebase.auth().currentUser.uid,
                 potName: potName,
                 coinsEntry: potCoins
             });
-        } else if(potPassword != null && potCoins > 0) {
+        } else if(potCoins > 0 && check != true) {
             firebase.database().ref('Pot/').set({
                 creator: firebase.auth().currentUser.uid,
                 potName: potName,
@@ -738,6 +776,9 @@ function createPot() {
     });
     firebase.database().ref('Pot' + 'Coins').set({
         pot: potCoins
+    });
+    firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
+        joined: true
     });
 }
 function potPassword() {
@@ -769,4 +810,26 @@ function potPassword() {
             alert("Wrong Password");
         }
     });
+}
+function endPot() {
+    var endAddress = document.getElementById('hide-input').value;
+    var coinsValue;
+    var newCoinsValue;
+    firebase.database().ref('Users/' + endAddress).once('value').then(function(snapshot) {
+        coinsValue = snapshot.val();
+        firebase.database().ref().once('value').then(function(snapshot) {
+            newCoinsValue = snapshot.val();
+            var holdValue = newCoinsValue.PotCoins.pot + coinsValue.coins;
+            firebase.database().ref('Users/' + endAddress).set({
+                coins: holdValue
+            });
+            finalizeRemove();
+        });
+    });
+}
+function finalizeRemove() {
+    firebase.database().ref('Pot').remove();
+    firebase.database().ref('PotCoins').remove();
+    firebase.database().ref('PotPlayers').remove();
+    location.reload();
 }
