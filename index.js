@@ -730,10 +730,10 @@ function runJoinNCAA() {
                 });
                 location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
             });
-        } else {
+        }/* else {
             alert("You have already signed up. Redirecting you to the bracket page now.");
             location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
-        }
+        }*/
     });
 }
 function createPot() {
@@ -832,4 +832,7 @@ function finalizeRemove() {
     firebase.database().ref('PotCoins').remove();
     firebase.database().ref('PotPlayers').remove();
     location.reload();
+}
+function openNCAA() {
+    location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
 }
