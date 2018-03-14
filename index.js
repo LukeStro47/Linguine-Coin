@@ -16,6 +16,9 @@ var duoy;
 var checkTwso;
 var duoyTwo;
 var competitors;
+var userTwoOld;
+var ncaaUser;
+var overallUser;
 //var onlineUser = firebase.auth().currentUser.uid;
 function signMeIn() {
     var email = document.getElementById('email').value;
@@ -52,8 +55,8 @@ window.onclick = function(event) {
     }
 }
 firebase.database().ref('NCAA').once('value').then(function(snapshot) {
-    oldUser = snapshot.val().pot || 'Anonymous';
-    document.getElementById('currentPot').innerHTML = 'Current Pot: ' + oldUser.toString() + ' Linguine Coins';
+    ncaaUser = snapshot.val().pot || 'Anonymous';
+    document.getElementById('currentPot').innerHTML = 'Current Pot: ' + ncaaUser.toString() + ' Linguine Coins';
 });
 function checkNCAA() {
     firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
@@ -65,13 +68,13 @@ function checkNCAA() {
     });
 }
 firebase.database().ref().once('value').then(function(snapshot) {
-    oldUser = snapshot.val() || 'Anonymous';
-    if(oldUser.Pot != null) {
-        if(oldUser.Pot.password == null) {
+    overallUser = snapshot.val() || 'Anonymous';
+    if(overallUser.Pot != null) {
+        if(overallUser.Pot.password == null) {
             document.getElementById('pot').style.display = "none";
             document.getElementById('potTwo').style.display = "block";
-            document.getElementById('pot-name-two').innerHTML = oldUser.Pot.potName;
-            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + oldUser.PotCoins.pot.toString() + ' Linguine Coins';
+            document.getElementById('pot-name-two').innerHTML = overallUser.Pot.potName;
+            document.getElementById('pot-total').innerHTML = 'Current Pot: ' + overallUser.PotCoins.pot.toString() + ' Linguine Coins';
         } else {
             document.getElementById('pot').style.display = "none";
             document.getElementById('potThree').style.display = "block";
@@ -84,21 +87,24 @@ firebase.database().ref().once('value').then(function(snapshot) {
 });
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
-    document.getElementById('luke-coins').innerHTML = oldUser.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins.toString() + ' Linguine Coins';
-    document.getElementById('eamon-coins').innerHTML = oldUser.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins.toString() + ' Linguine Coins';
-    document.getElementById('nathan-coins').innerHTML = oldUser.V9dkluL27TXX2xeAYKRAmULEWvS2.coins.toString() + ' Linguine Coins';
-    document.getElementById('paul-coins').innerHTML = oldUser.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins.toString() + ' Linguine Coins';
-    document.getElementById('jason-coins').innerHTML = oldUser.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins.toString() + ' Linguine Coins';
-    document.getElementById('gavin-coins').innerHTML = oldUser.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins.toString() + ' Linguine Coins';
-    document.getElementById('chance-coins').innerHTML = oldUser.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins.toString() + ' Linguine Coins';
-    document.getElementById('carson-coins').innerHTML = oldUser.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins.toString() + ' Linguine Coins';
-    document.getElementById('luke-V-coins').innerHTML = oldUser.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins.toString() + ' Linguine Coins';
-    document.getElementById('gavin-R-coins').innerHTML = oldUser.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins.toString() + ' Linguine Coins';
-    document.getElementById('tyler-coins').innerHTML = oldUser.j8h8tvQktlPmx4VioSplYmdpPmI2.coins.toString() + ' Linguine Coins';
-    document.getElementById('liam-coins').innerHTML = oldUser.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins.toString() + ' Linguine Coins';
-    document.getElementById('niko-coins').innerHTML = oldUser.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins.toString() + ' Linguine Coins';
-    document.getElementById('jacob-coins').innerHTML = oldUser.wzRqMSjNwqOtfk49jP849GCIYn63.coins.toString() + ' Linguine Coins';
-    document.getElementById('jackie-coins').innerHTML = oldUser.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins.toString() + ' Linguine Coins';
+});
+firebase.database().ref('Users').once('value').then(function(snapshot) {
+    userTwoOld = snapshot.val() || 'Anonymous';
+    document.getElementById('luke-coins').innerHTML = userTwoOld.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins.toString() + ' Linguine Coins';
+    document.getElementById('eamon-coins').innerHTML = userTwoOld.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins.toString() + ' Linguine Coins';
+    document.getElementById('nathan-coins').innerHTML = userTwoOld.V9dkluL27TXX2xeAYKRAmULEWvS2.coins.toString() + ' Linguine Coins';
+    document.getElementById('paul-coins').innerHTML = userTwoOld.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins.toString() + ' Linguine Coins';
+    document.getElementById('jason-coins').innerHTML = userTwoOld.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins.toString() + ' Linguine Coins';
+    document.getElementById('gavin-coins').innerHTML = userTwoOld.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins.toString() + ' Linguine Coins';
+    document.getElementById('chance-coins').innerHTML = userTwoOld.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins.toString() + ' Linguine Coins';
+    document.getElementById('carson-coins').innerHTML = userTwoOld.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins.toString() + ' Linguine Coins';
+    document.getElementById('luke-V-coins').innerHTML = userTwoOld.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins.toString() + ' Linguine Coins';
+    document.getElementById('gavin-R-coins').innerHTML = userTwoOld.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins.toString() + ' Linguine Coins';
+    document.getElementById('tyler-coins').innerHTML = userTwoOld.j8h8tvQktlPmx4VioSplYmdpPmI2.coins.toString() + ' Linguine Coins';
+    document.getElementById('liam-coins').innerHTML = userTwoOld.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins.toString() + ' Linguine Coins';
+    document.getElementById('niko-coins').innerHTML = userTwoOld.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins.toString() + ' Linguine Coins';
+    document.getElementById('jacob-coins').innerHTML = userTwoOld.wzRqMSjNwqOtfk49jP849GCIYn63.coins.toString() + ' Linguine Coins';
+    document.getElementById('jackie-coins').innerHTML = userTwoOld.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins.toString() + ' Linguine Coins';
 });
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
@@ -137,7 +143,6 @@ function checkTwo() {
 }
 function checkThree() {
     if(duoyTwo.Pot.creator == firebase.auth().currentUser.uid) {
-        console.log("sDope");
         document.getElementById('pot').style.display = "none";
         document.getElementById('potThree').style.display = "none";
         document.getElementById('potTwo').style.display = "block";
@@ -596,7 +601,7 @@ function toLiam() {
     }
 }
 function toNiko() {
-	var currentUserId = firebase.auth().currentUser.uid;
+    var currentUserId = firebase.auth().currentUser.uid;
 	var lukesCoins = oldUser.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins;
     var forDescription = document.getElementById('niko-for').value;
 	var newAmount = parseInt(document.getElementById('niko-number').value);
@@ -835,4 +840,9 @@ function finalizeRemove() {
 }
 function openNCAA() {
     location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
+}
+function submitStartBet() {
+    var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne');
+    var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo');
+    firebase.database().ref('BetGame')
 }
