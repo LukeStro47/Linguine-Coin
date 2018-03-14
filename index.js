@@ -1,3 +1,4 @@
+//xp;VW%7A'EGUHFHN
 var config = {
     apiKey: 'AIzaSyBJlRXW9O6aAGBcZOvTMpiJUU6aOSc8STc',
 	authDomain: 'linguine-coin.firebaseapp.com',
@@ -844,5 +845,10 @@ function openNCAA() {
 function submitStartBet() {
     var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne');
     var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo');
-    firebase.database().ref('BetGame')
+    firebase.database().ref('BetGame').set({
+        allOne: teamOne,
+        allTwo: teamTwo,
+        gameName: teamOne + ' ' + 'vs.' + ' ' + teamTwo,
+        test: 'yes'
+    });
 }
