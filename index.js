@@ -20,6 +20,7 @@ var competitors;
 var userTwoOld;
 var ncaaUser;
 var overallUser;
+var betUser;
 //var onlineUser = firebase.auth().currentUser.uid;
 function signMeIn() {
     var email = document.getElementById('email').value;
@@ -88,6 +89,15 @@ firebase.database().ref().once('value').then(function(snapshot) {
 });
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
+});
+firebase.database().ref().once('value').then(function(snapshot) {
+    betUser = snapshot.val() || 'Anonymous';
+    if(betUser.BetGame != null) {
+        if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2") {
+            document.getElementById('portal').style.display = "none";
+            document.getElementById('portalTwo').style.display = "block";
+        }
+    }
 });
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     userTwoOld = snapshot.val() || 'Anonymous';
@@ -163,6 +173,7 @@ function checkForUser() {
 	currentUserId = firebase.auth().currentUser.uid;
 	if (currentUserId == 'Nv7UcjC551hX9cXLJ0aXhoINAKL2') {
         document.getElementById('luke-div').style.display = 'none';
+        document.getElementById('portal').style.display = 'block';
     } else if (currentUserId == 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2') {
 		document.getElementById('eamon-div').style.display = 'none';
 	} else if (currentUserId == 'V9dkluL27TXX2xeAYKRAmULEWvS2') {
@@ -171,8 +182,10 @@ function checkForUser() {
 		document.getElementById('paul-div').style.display = 'none';
 	} else if (currentUserId == 'Nu3BMirKtKUziXS3nhDLtJraxOz1') {
 		document.getElementById('jason-div').style.display = 'none';
+        document.getElementById('portal').style.display = 'block';
 	} else if (currentUserId == 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2') {
 		document.getElementById('gavin-div').style.display = 'none';
+        document.getElementById('portsl').style.display = 'block';
 	} else if (currentUserId == 'X91iiHJqAucY1cAGhoCTo3Tq1ch1') {
 		document.getElementById('chance-div').style.display = 'none';
 	} else if (currentUserId == 'L9oJ18itmrOXOAi4vhf6ahDHhHw1') {
@@ -296,7 +309,7 @@ function toNathan() {
     }
 }
 function toPaul() {
-	var currentUserId = firebase.auth().currentUser.uid;
+    var currentUserId = firebase.auth().currentUser.uid;
 	var lukesCoins = oldUser.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins;
     var forDescription = document.getElementById('paul-for').value;
 	var newAmount = parseInt(document.getElementById('paul-number').value);
@@ -843,12 +856,16 @@ function openNCAA() {
     location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
 }
 function submitStartBet() {
-    var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne');
-    var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo');
+    var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne').value;
+    var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo').value;
+    var date = document.getElementById('date').value;
+    var time = document.getElementById('time').value;
     firebase.database().ref('BetGame').set({
         allOne: teamOne,
         allTwo: teamTwo,
         gameName: teamOne + ' ' + 'vs.' + ' ' + teamTwo,
-        test: 'yes'
+        date: date,
+        time: time
     });
+    location.reload();
 }

@@ -301,12 +301,23 @@
         <div id="portal" style="display: none">
             <h1 style="text-align: center;">Make a Betting Game</h1>
             <input type="text" placeholder="Team One City" id="teamOneCity">
-            <input type="password" placeholder="Team One Name" id="teamOne">
+            <input type="text" placeholder="Team One Name" id="teamOne">
             <input type="text" placeholder="Team Two City" id="teamTwoCity">
-            <input type="password" placeholder="Team Two Name" id="teamTwo">
+            <input type="text" placeholder="Team Two Name" id="teamTwo">
+            <input type="text" placeholder="Game Date (Ex. Mar 5)" id="date">
+            <input type="text" placeholder="Game Time (Ex. 7:30 PM)" id="time">
             <br>
             <br>
             <button style="display: block; margin: 0 auto;" id="submitBetGame" onclick="submitStartBet()">Open Site</button>
+        </div>
+        <div id="portalTwo" style="display: none">
+            <h1 style="text-align: center;">Current Game</h1>
+            <h2>Team One</h2>
+            <h2>Team Two</h2>
+            <button id="closeBets" onclick="closeBets()" style="width: 24.5%">Close Bets</button>
+            <button id="openBets" onclick="openBets()" style="width: 24.5%">Open Bets</button>
+            <button id="payoutBets" onclick="payoutBets()" style="width: 24.5%">Payout Bets</button>
+            <button id="deleteBets" onclick="deleteBets()" style="width: 24.5%">Delete Game</button>
         </div>
         <div id="ncaa">
             <h1 style="text-align: center;">NCAA Competition</h1>
