@@ -148,15 +148,15 @@ function checkBetUser() {
         console.log(newBetUser.BetGame.allOne);
         if(newBetUser.BetGame != null) {
             document.getElementById('currentGame').innerHTML = newBetUser.BetGame.gameName + ' - ' + newBetUser.BetGame.date + ' ' + '(' + newBetUser.BetGame.time + ')';
-            changeInnerHTML();
+            document.getElementById('teamOneH').innerHTML = newBetUser.BetGame.allOne;
+            document.getElementById('teamTwoH').innerHTML = newBetUser.BetGame.allTwo;
+            if(newBetUser.BetGame.Able.accepting == false) {
+                document.getElementById('teamOneBet').style.display = "none";
+                document.getElementById('teamTwoBet').style.display = "none";
+                document.getElementById('oneButton').style.display = "none";
+                document.getElementById('twoButton').style.display = "none";
+            }
         }
-    });
-}
-function changeInnerHTML() {
-    firebase.database().ref().once('value').then(function(snapshot) {
-        newBetUserTwo = snapshot.val() || 'Anonymous';
-        document.getElementById('teamOne').innerHTML = newBetUserTwo.BetGame.gameName;
-        document.getElementById('teamTwo').innerHTML = newBetUserTwo.BetGame.allTwo;
     });
 }
 function startPotCheck() {
@@ -895,8 +895,63 @@ function submitStartBet() {
     });
     location.reload();
 }
-function startBets() {
+function openBets() {
     firebase.database().ref('BetGame/' + 'Able').set({
         accepting: true
     });
+    location.reload();
+}
+function closeBets() {
+    firebase.database().ref('BetGame/' + 'Able').set({
+        accepting: false
+    });
+    location.reload();
+}
+function deleteBets() {
+    firebase.database().ref('BetGame').remove();
+    location.reload();
+}
+function teamOneBet() {
+    var saveNewBet;
+    var bet = parseInt(document.getElementById('teamOneBet').value);
+    if(bet > 0){
+        firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+            var userCoinsNow = snapshot.val() || 'Anonymous';
+            saveNewBet = userCoinsNow.coins - bet;
+            if(saveNewBet > 0) {
+                firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                    coins: saveNewBet
+                });
+                firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').once('value').then(function(snapshot) {
+                    var currrentBetOwn = snapshot.val() || 'Anonymous';
+                    if(currrentBetOwn != null) {
+                        var saveThisValue = currrentBetOwn.bet + bet;
+                        firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').set({
+                            bet: saveThisValue
+                        });
+                    } else {
+                        firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').set({
+                            bet: bet
+                        });
+                    }
+                });
+                firebase.database().ref().once('value').then(function(snapshot) {
+                    var saveForGameCheck = snapshot.val() || 'Anonymous';
+                    if(saveForGameCheck.BetGame.OverallBetGame != null) {
+                        firebase.database().ref('BetGame/' + 'OverallBetOne').once('value').then(function(snapshot) {
+                            var intervalTest = snapshot.val() || 'Anonymous';
+                            var setThisBetTo = intervalTest.bet + bet;
+                            firebase.database().ref('BetGame/' + 'OverallBetOne').set({
+                                bet: setThisBetTo
+                            });
+                        });
+                    } else {
+                        firebase.database().ref('BetGame/' + 'OverallBetOne').set({
+                            bet: bet
+                        });
+                    }
+                });
+            }
+        });
+    }
 }
