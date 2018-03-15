@@ -21,6 +21,8 @@ var userTwoOld;
 var ncaaUser;
 var overallUser;
 var betUser;
+var newBetUser;
+var newBetUserTwo;
 //var onlineUser = firebase.auth().currentUser.uid;
 function signMeIn() {
     var email = document.getElementById('email').value;
@@ -93,9 +95,14 @@ firebase.database().ref('Users').once('value').then(function(snapshot) {
 firebase.database().ref().once('value').then(function(snapshot) {
     betUser = snapshot.val() || 'Anonymous';
     if(betUser.BetGame != null) {
-        if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2") {
-            document.getElementById('portal').style.display = "none";
+        if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
+            document.getElementById('portalThree').style.display = "block";
             document.getElementById('portalTwo').style.display = "block";
+        }
+    } else {
+        if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
+            document.getElementById('portal').style.display = "block";
+            document.getElementById('portalThree').style.display = "none";
         }
     }
 });
@@ -129,10 +136,29 @@ firebase.auth().onAuthStateChanged(function(user) {
         checkForUser();
         startPotCheck();
         checkNCAA();
+        checkBetUser();
 	} else {
 		// User is signed out.
 	}
 });
+function checkBetUser() {
+    document.getElementById('portalThree').style.display = "block";
+    firebase.database().ref().once('value').then(function(snapshot) {
+        newBetUser = snapshot.val() || 'Anonymous';
+        console.log(newBetUser.BetGame.allOne);
+        if(newBetUser.BetGame != null) {
+            document.getElementById('currentGame').innerHTML = newBetUser.BetGame.gameName + ' - ' + newBetUser.BetGame.date + ' ' + '(' + newBetUser.BetGame.time + ')';
+            changeInnerHTML();
+        }
+    });
+}
+function changeInnerHTML() {
+    firebase.database().ref().once('value').then(function(snapshot) {
+        newBetUserTwo = snapshot.val() || 'Anonymous';
+        document.getElementById('teamOne').innerHTML = newBetUserTwo.BetGame.gameName;
+        document.getElementById('teamTwo').innerHTML = newBetUserTwo.BetGame.allTwo;
+    });
+}
 function startPotCheck() {
     firebase.database().ref().once('value').then(function(snapshot) {
         duoyTwo = snapshot.val() || 'Anonymous';
@@ -173,7 +199,6 @@ function checkForUser() {
 	currentUserId = firebase.auth().currentUser.uid;
 	if (currentUserId == 'Nv7UcjC551hX9cXLJ0aXhoINAKL2') {
         document.getElementById('luke-div').style.display = 'none';
-        document.getElementById('portal').style.display = 'block';
     } else if (currentUserId == 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2') {
 		document.getElementById('eamon-div').style.display = 'none';
 	} else if (currentUserId == 'V9dkluL27TXX2xeAYKRAmULEWvS2') {
@@ -182,10 +207,8 @@ function checkForUser() {
 		document.getElementById('paul-div').style.display = 'none';
 	} else if (currentUserId == 'Nu3BMirKtKUziXS3nhDLtJraxOz1') {
 		document.getElementById('jason-div').style.display = 'none';
-        document.getElementById('portal').style.display = 'block';
 	} else if (currentUserId == 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2') {
 		document.getElementById('gavin-div').style.display = 'none';
-        document.getElementById('portsl').style.display = 'block';
 	} else if (currentUserId == 'X91iiHJqAucY1cAGhoCTo3Tq1ch1') {
 		document.getElementById('chance-div').style.display = 'none';
 	} else if (currentUserId == 'L9oJ18itmrOXOAi4vhf6ahDHhHw1') {
@@ -867,5 +890,13 @@ function submitStartBet() {
         date: date,
         time: time
     });
+    firebase.database().ref('BetGame/' + 'Able').set({
+        accepting: true
+    });
     location.reload();
+}
+function startBets() {
+    firebase.database().ref('BetGame/' + 'Able').set({
+        accepting: true
+    });
 }
