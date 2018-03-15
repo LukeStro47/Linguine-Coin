@@ -1,11 +1,11 @@
 //xp;VW%7A'EGUHFHN
 var config = {
     apiKey: 'AIzaSyBJlRXW9O6aAGBcZOvTMpiJUU6aOSc8STc',
-	authDomain: 'linguine-coin.firebaseapp.com',
-	databaseURL: 'https://linguine-coin.firebaseio.com',
-	projectId: 'linguine-coin',
-	storageBucket: 'linguine-coin.appspot.com',
-	messagingSenderId: '244166940420',
+    authDomain: 'linguine-coin.firebaseapp.com',
+  	databaseURL: 'https://linguine-coin.firebaseio.com',
+  	projectId: 'linguine-coin',
+  	storageBucket: 'linguine-coin.appspot.com',
+  	messagingSenderId: '244166940420',
 };
 firebase.initializeApp(config);
 var oldUser;
@@ -95,6 +95,13 @@ firebase.database().ref('Users').once('value').then(function(snapshot) {
 firebase.database().ref().once('value').then(function(snapshot) {
     betUser = snapshot.val() || 'Anonymous';
     if(betUser.BetGame != null) {
+        document.getElementById('pOne').innerHTML = betUser.BetGame.OverallBetOne.bet + ' Linguine Coins Bet';
+        document.getElementById('pTwo').innerHTML = betUser.BetGame.OverallBetTwo.bet + ' Linguine Coins Bet';
+        firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+            var saveBetCheck = snapshot.val() || 'Anonymous';
+            document.getElementById('pOneOne').innerHTML = 'You\'re Bet: ' + saveBetCheck.teamOne.bet + ' Linguine Coins';
+            document.getElementById('pTwoTwo').innerHTML = 'You\'re Bet: ' + saveBetCheck.teamTwo.bet + ' Linguine Coins';
+        });
         if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
             document.getElementById('portalThree').style.display = "block";
             document.getElementById('portalTwo').style.display = "block";
@@ -102,6 +109,7 @@ firebase.database().ref().once('value').then(function(snapshot) {
     } else {
         if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
             document.getElementById('portal').style.display = "block";
+            document.getElementById('portalTwo').style.display = "none";
             document.getElementById('portalThree').style.display = "none";
         }
     }
@@ -893,6 +901,102 @@ function submitStartBet() {
     firebase.database().ref('BetGame/' + 'Able').set({
         accepting: true
     });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63/' + 'teamTwo').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'OverallBetOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'OverallBetTwo').set({
+        bet: 0
+    });
     location.reload();
 }
 function openBets() {
@@ -924,34 +1028,63 @@ function teamOneBet() {
                 });
                 firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').once('value').then(function(snapshot) {
                     var currrentBetOwn = snapshot.val() || 'Anonymous';
-                    if(currrentBetOwn != null) {
-                        var saveThisValue = currrentBetOwn.bet + bet;
-                        firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').set({
-                            bet: saveThisValue
-                        });
-                    } else {
-                        firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').set({
-                            bet: bet
-                        });
-                    }
+                    var saveThisValue = currrentBetOwn.bet + bet;
+                    firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamOne').set({
+                        bet: saveThisValue
+                    });
                 });
                 firebase.database().ref().once('value').then(function(snapshot) {
                     var saveForGameCheck = snapshot.val() || 'Anonymous';
-                    if(saveForGameCheck.BetGame.OverallBetGame != null) {
-                        firebase.database().ref('BetGame/' + 'OverallBetOne').once('value').then(function(snapshot) {
-                            var intervalTest = snapshot.val() || 'Anonymous';
-                            var setThisBetTo = intervalTest.bet + bet;
-                            firebase.database().ref('BetGame/' + 'OverallBetOne').set({
-                                bet: setThisBetTo
-                            });
-                        });
-                    } else {
+                    firebase.database().ref('BetGame/' + 'OverallBetOne').once('value').then(function(snapshot) {
+                        var intervalTest = snapshot.val() || 'Anonymous';
+                        var setThisBetTo = intervalTest.bet + bet;
                         firebase.database().ref('BetGame/' + 'OverallBetOne').set({
-                            bet: bet
+                            bet: setThisBetTo
                         });
-                    }
+                    });
                 });
+            } else {
+                alert("Insufficient Funds");
             }
         });
+    } else {
+        alert("Input must be a positive, whole number.");
+    }
+    location.reload();
+}
+function teamTwoBet() {
+    var saveNewBet;
+    var bet = parseInt(document.getElementById('teamTwoBet').value);
+    if(bet > 0){
+        firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+            var userCoinsNow = snapshot.val() || 'Anonymous';
+            saveNewBet = userCoinsNow.coins - bet;
+            if(saveNewBet > 0) {
+                firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                    coins: saveNewBet
+                });
+                firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamTwo').once('value').then(function(snapshot) {
+                    var currrentBetOwn = snapshot.val() || 'Anonymous';
+                    var saveThisValue = currrentBetOwn.bet + bet;
+                    firebase.database().ref('BetGame/' + 'Users/' + firebase.auth().currentUser.uid + '/' + 'teamTwo').set({
+                        bet: saveThisValue
+                    });
+                });
+                firebase.database().ref().once('value').then(function(snapshot) {
+                    var saveForGameCheck = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('BetGame/' + 'OverallBetTwo').once('value').then(function(snapshot) {
+                        var intervalTest = snapshot.val() || 'Anonymous';
+                        var setThisBetTo = intervalTest.bet + bet;
+                        firebase.database().ref('BetGame/' + 'OverallBetTwo').set({
+                            bet: setThisBetTo
+                        });
+                    });
+                });
+            } else {
+                alert("Insufficient Funds");
+            }
+        });
+    } else {
+        alert("Input must be a positive, whole number.");
     }
 }

@@ -308,7 +308,7 @@
             <input type="text" placeholder="Game Time (Ex. 7:30 PM)" id="time">
             <br>
             <br>
-            <button style="display: block; margin: 0 auto;" id="submitBetGame" onclick="submitStartBet()">Open Site</button>
+            <button style="display: block; margin: 0 auto;" id="submitBetGame" onclick="submitStartBet()">Create</button>
         </div>
         <div id="portalTwo" style="display: none">
             <h1 style="text-align: center;">Current Game</h1>
@@ -322,11 +322,13 @@
         <div id="portalThree" style="display: none">
             <h1 style="text-align: center;" id="currentGame">Current Game - Mar 15th</h1>
             <h2 style="text-align: center;" id="teamOneH">dd</h2>
-            <p style="text-align: center;">Current Bets</p>
+            <p style="text-align: center;" id="pOne">Currently Betting</p>
+            <p id="pOneOne" style="text-align: center;">Your Bets</p>
             <input type="number" placeholder="Bet" style="display: block; margin: 0 auto;" id="teamOneBet">
             <button style="display: block; margin: 0 auto;" onclick="teamOneBet()" id="oneButton">Place</button>
             <h2 style="text-align: center;" id="teamTwoH">Team Two</h2>
-            <p style="text-align: center;">Current Bets</p>
+            <p style="text-align: center;" id="pTwo">Currently Betting</p>
+            <p id="pTwoTwo" style="text-align: center;">Your Bets</p>
             <input type="number" placeholder="Bet" style="display: block; margin: 0 auto;" id="teamTwoBet">
             <button style="display: block; margin: 0 auto;" onclick="teamTwoBet()" id="twoButton">Place</button>
         </div>
