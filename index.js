@@ -1050,7 +1050,6 @@ function teamOneBet() {
     } else {
         alert("Input must be a positive, whole number.");
     }
-    location.reload();
 }
 function teamTwoBet() {
     var saveNewBet;
