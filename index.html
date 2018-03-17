@@ -259,12 +259,18 @@
             <p id="li1" style="text-align: center"></p>
         </div>
         <div style="padding: 30px;">
-            <h1 style="text-align: center;">The Price is Right - Weekly Contest (Ends 3/16)</h1>
+            <h1 style="text-align: center;">The Price is Right - Weekly Contest (Ends Every Friday)</h1>
             
             <div>
-                <h2>Minute Maid 2 Liter Bottle of Fruit Punch</h2>
-                <img src="https://www.minutemaid.com/content/dam/minutemaid/hero/FruitPunch_2LBottle_Hero.png" style="display: block; margin: 0 auto; width: 10%; height: auto;">
+                <h2 id="nameOfProduct">Product</h2>
+                <img style="display: block; margin: 0 auto; width: 10%; height: auto;" id="savePhoto">
                 <button style="display: block; margin: 0 auto;" id="myBtn">Guess</button>
+                <br>
+                <input type="text" style="display: none; margin: 0 auto" id="PirInp" placeholder="Link">
+                <input type="text" style="display: none; margin: 0 auto" id="PirName" placeholder="Name">
+                <button style="display: none; margin: 0 auto" id="PirBut" onclick="addToData()">Submit Link</button>
+                <button style="display: none; margin: 0 auto" id="PirBut2" onclick="startAgain()">Start Again</button>
+                <button style="display: none; margin: 0 auto" id="PirBut3" onclick="window.open('http://priceisright.wikia.com/wiki/Grocery_prices');">Show Site</button>
             </div>
         </div>
         <!-- The Modal -->
@@ -311,9 +317,7 @@
             <button style="display: block; margin: 0 auto;" id="submitBetGame" onclick="submitStartBet()">Create</button>
         </div>
         <div id="portalTwo" style="display: none">
-            <h1 style="text-align: center;">Current Game</h1>
-            <h2>Team One</h2>
-            <h2>Team Two</h2>
+            <h1 style="text-align: center;" id="currentGameTwo">Current Game</h1>
             <button id="closeBets" onclick="closeBets()" style="width: 24.5%">Close Bets</button>
             <button id="openBets" onclick="openBets()" style="width: 24.5%">Open Bets</button>
             <button id="payoutBets" onclick="payoutBets()" style="width: 24.5%">Payout Bets</button>
@@ -332,11 +336,19 @@
             <input type="number" placeholder="Bet" style="display: block; margin: 0 auto;" id="teamTwoBet">
             <button style="display: block; margin: 0 auto;" onclick="teamTwoBet()" id="twoButton">Place</button>
         </div>
+        <div id="manual" style="display: none">
+            <h1 style="text-align: center;">Manual Transfer</h1>
+            <input type="text" placeholder="From" id="from-who" style="width: 24.5%">
+            <input type="text" placeholder="To" id="to-who" style="width: 24.5%">
+            <input type="text" placeholder="Coins" id="coins-much" style="width: 24.5%">
+            <input type="text" placeholder="For" id="for-what" style="width: 24.5%">
+            <button onclick="manualTransfer()" style="display: block; margin: 0 auto;">Transfer</button>
+        </div>
         <div id="ncaa">
             <h1 style="text-align: center;">NCAA Competition</h1>
             <h2 style="text-align: center;" id="currentPot">Current Pot Loading...</h2>
-            <button onclick="runJoinNCAA()" style="display: block; margin: 0 auto;" id="joinNCAA">Join For 20 Coins</button>
-            <button onclick="openNCAA()" style="display: none; margin: 0 auto;" id="joinNCAAR">Open Site</button>
+            <button onclick="runJoinNCAA()" style="display: none; margin: 0 auto;" id="joinNCAA">Join For 20 Coins</button>
+            <button onclick="openNCAA()" style="display: block; margin: 0 auto;" id="joinNCAAR">Open Site</button>
         </div>
     </body>
     <script src="index.js"></script>

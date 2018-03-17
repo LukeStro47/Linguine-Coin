@@ -62,7 +62,7 @@ firebase.database().ref('NCAA').once('value').then(function(snapshot) {
     ncaaUser = snapshot.val().pot || 'Anonymous';
     document.getElementById('currentPot').innerHTML = 'Current Pot: ' + ncaaUser.toString() + ' Linguine Coins';
 });
-function checkNCAA() {
+/*function checkNCAA() {
     firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
         competitors = snapshot.val() || 'Anonymous';
         if(competitors.signedUp == true) {
@@ -70,7 +70,7 @@ function checkNCAA() {
             document.getElementById('joinNCAAR').style.display = "block";
         }
     });
-}
+}*/
 firebase.database().ref().once('value').then(function(snapshot) {
     overallUser = snapshot.val() || 'Anonymous';
     if(overallUser.Pot != null) {
@@ -92,6 +92,12 @@ firebase.database().ref().once('value').then(function(snapshot) {
 firebase.database().ref('Users').once('value').then(function(snapshot) {
     oldUser = snapshot.val() || 'Anonymous';
 });
+firebase.database().ref('Price is Right').once('value').then(function(snapshot) {
+    var priceIsRight = snapshot.val() || 'Anonymous';
+    document.getElementById('nameOfProduct').innerHTML = priceIsRight.name;
+    document.getElementById('savePhoto').src = priceIsRight.link;
+    console.log(priceIsRight.Guesses);
+});
 firebase.database().ref().once('value').then(function(snapshot) {
     betUser = snapshot.val() || 'Anonymous';
     if(betUser.BetGame != null) {
@@ -105,6 +111,7 @@ firebase.database().ref().once('value').then(function(snapshot) {
         if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
             document.getElementById('portalThree').style.display = "block";
             document.getElementById('portalTwo').style.display = "block";
+            document.getElementById('currentGameTwo').innerHTML = betUser.BetGame.gameName;
         }
     } else {
         if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2" || firebase.auth().currentUser.uid == "Y6Gda6VmfmXewW2IWg7r4KXVE4M2" || firebase.auth().currentUser.uid == "Nu3BMirKtKUziXS3nhDLtJraxOz1") {
@@ -143,8 +150,23 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
         checkForUser();
         startPotCheck();
-        checkNCAA();
+        //checkNCAA();
         checkBetUser();
+        if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2") {
+            document.getElementById('manual').style.display = "block";
+            document.getElementById('PirInp').style.display = "block";
+            document.getElementById('PirBut').style.display = "block";
+            document.getElementById('PirName').style.display = "block";
+            document.getElementById('PirBut2').style.display = "block";
+            document.getElementById('PirBut3').style.display = "block";
+        } else {
+            document.getElementById('manual').remove();
+            document.getElementById('PirInp').remove();
+            document.getElementById('PirBut').remove();
+            document.getElementById('PirName').remove();
+            document.getElementById('PirBut2').remove();
+            document.getElementById('PirBut3').remove();
+        }
 	} else {
 		// User is signed out.
 	}
@@ -268,7 +290,9 @@ function toLuke() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toEamon() {
@@ -302,7 +326,9 @@ function toEamon() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toNathan() {
@@ -336,7 +362,9 @@ function toNathan() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toPaul() {
@@ -370,7 +398,9 @@ function toPaul() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toJason() {
@@ -404,7 +434,9 @@ function toJason() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toGavin() {
@@ -438,7 +470,9 @@ function toGavin() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toChance() {
@@ -472,7 +506,9 @@ function toChance() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toCarson() {
@@ -506,7 +542,9 @@ function toCarson() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toLukeV() {
@@ -540,7 +578,9 @@ function toLukeV() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toGavinR() {
@@ -574,7 +614,9 @@ function toGavinR() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toTyler() {
@@ -608,7 +650,9 @@ function toTyler() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toLiam() {
@@ -642,7 +686,9 @@ function toLiam() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toNiko() {
@@ -676,7 +722,9 @@ function toNiko() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toJacob() {
@@ -710,7 +758,9 @@ function toJacob() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toJackie() {
@@ -744,11 +794,13 @@ function toJackie() {
                 update: stringForDescription
             });
         });
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
     }
 }
 function toDatabase() {
-    firebase.database().ref('Price is Right/' + firebase.auth().currentUser.uid).set({
+    firebase.database().ref('Price is Right/' + 'Guesses/' + firebase.auth().currentUser.uid).set({
         guess: document.getElementById('modalInput').value
     });
     modal.style.display = "none";
@@ -830,6 +882,9 @@ function createPot() {
     firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
         joined: true
     });
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function potPassword() {
     var inputPass = document.getElementById('pot-pass').value;
@@ -881,7 +936,9 @@ function finalizeRemove() {
     firebase.database().ref('Pot').remove();
     firebase.database().ref('PotCoins').remove();
     firebase.database().ref('PotPlayers').remove();
-    location.reload();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function openNCAA() {
     location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
@@ -997,23 +1054,31 @@ function submitStartBet() {
     firebase.database().ref('BetGame/' + 'OverallBetTwo').set({
         bet: 0
     });
-    location.reload();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function openBets() {
     firebase.database().ref('BetGame/' + 'Able').set({
         accepting: true
     });
-    location.reload();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function closeBets() {
     firebase.database().ref('BetGame/' + 'Able').set({
         accepting: false
     });
-    location.reload();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function deleteBets() {
     firebase.database().ref('BetGame').remove();
-    location.reload();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function teamOneBet() {
     var saveNewBet;
@@ -1050,6 +1115,9 @@ function teamOneBet() {
     } else {
         alert("Input must be a positive, whole number.");
     }
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
 function teamTwoBet() {
     var saveNewBet;
@@ -1086,4 +1154,201 @@ function teamTwoBet() {
     } else {
         alert("Input must be a positive, whole number.");
     }
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
+}
+function payoutBets() {
+    firebase.database().ref().once('value').then(function(snapshot) {
+        var promptSave = snapshot.val() || 'Anonymous';
+        var savedInput = prompt("Who won? Enter either " + "\"" + promptSave.BetGame.allOne + "\"" + " or " + "\"" + promptSave.BetGame.allTwo + "\".");
+        if(savedInput == promptSave.BetGame.allOne) {
+            var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
+                coins: checkOne + promptSave.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins
+            });
+            var checkTwo = promptSave.BetGame.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
+                coins: checkTwo + promptSave.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins
+            });
+            var checkThree = promptSave.BetGame.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
+                coins: checkThree + promptSave.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.coins
+            });
+            var checkFour = promptSave.BetGame.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
+                coins: checkFour + promptSave.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins
+            });
+            var checkFive = promptSave.BetGame.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
+                coins: checkFive + promptSave.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins
+            });
+            var checkSix = promptSave.BetGame.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
+                coins: checkSix + promptSave.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins
+            });
+            var checkSeven = promptSave.BetGame.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
+                coins: checkSeven + promptSave.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins
+            });
+            var checkEight = promptSave.BetGame.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
+                coins: checkEight + promptSave.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins
+            });
+            var checkNine = promptSave.BetGame.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+                coins: checkNine + promptSave.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins
+            });
+            var checkTen = promptSave.BetGame.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
+                coins: checkTen + promptSave.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins
+            });
+            var checkEleven = promptSave.BetGame.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
+                coins: checkEleven + promptSave.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins
+            });
+            var checkTwelve = promptSave.BetGame.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
+                coins: checkTwelve + promptSave.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.coins
+            });
+            var checkThirteen = promptSave.BetGame.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
+                coins: checkThirteen + promptSave.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins
+            });
+            var checkFourteen = promptSave.BetGame.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
+                coins: checkFourteen + promptSave.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins
+            });
+            var checkFifteen = promptSave.BetGame.Users.wzRqMSjNwqOtfk49jP849GCIYn63.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
+                coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
+            });
+        } else if(savedInput == promptSave.BetGame.allTwo) {
+            var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
+                coins: checkOne + promptSave.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins
+            });
+            var checkTwo = promptSave.BetGame.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
+                coins: checkTwo + promptSave.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins
+            });
+            var checkThree = promptSave.BetGame.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
+                coins: checkThree + promptSave.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.coins
+            });
+            var checkFour = promptSave.BetGame.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
+                coins: checkFour + promptSave.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins
+            });
+            var checkFive = promptSave.BetGame.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
+                coins: checkFive + promptSave.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins
+            });
+            var checkSix = promptSave.BetGame.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
+                coins: checkSix + promptSave.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins
+            });
+            var checkSeven = promptSave.BetGame.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
+                coins: checkSeven + promptSave.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins
+            });
+            var checkEight = promptSave.BetGame.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
+                coins: checkEight + promptSave.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins
+            });
+            var checkNine = promptSave.BetGame.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+                coins: checkNine + promptSave.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins
+            });
+            var checkTen = promptSave.BetGame.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
+                coins: checkTen + promptSave.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins
+            });
+            var checkEleven = promptSave.BetGame.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
+                coins: checkEleven + promptSave.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins
+            });
+            var checkTwelve = promptSave.BetGame.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
+                coins: checkTwelve + promptSave.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.coins
+            });
+            var checkThirteen = promptSave.BetGame.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
+                coins: checkThirteen + promptSave.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins
+            });
+            var checkFourteen = promptSave.BetGame.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
+                coins: checkFourteen + promptSave.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins
+            });
+            var checkFifteen = promptSave.BetGame.Users.wzRqMSjNwqOtfk49jP849GCIYn63.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
+                coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
+            });
+        } else {
+            alert("Invalid Response");
+            payoutBets();
+        }
+    });
+    setTimeout(function () {
+        firebase.database().ref('BetGame').remove();
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
+    }, 3000);
+}
+function manualTransfer() {
+    var from = document.getElementById('from-who').value;
+    var to = document.getElementById('to-who').value;
+    var forIt = document.getElementById('for-what').value;
+    var newCoinsValue = parseInt(document.getElementById('coins-much').value);
+    if(from != "B") {
+        firebase.database().ref('Users/' + from).once('value').then(function(snapshot) {
+            var savedVarSnap = snapshot.val() || 'Anonymous';
+            var saveCoinsToValue = savedVarSnap.coins - newCoinsValue;
+            firebase.database().ref('Users/' + from).set({
+                coins: saveCoinsToValue
+            });
+        });
+        firebase.database().ref('Users/' + to).once('value').then(function(snapshot) {
+            var savedVarSnapTwo = snapshot.val() || 'Anonymous';
+            var saveCoinsToValueTwo = savedVarSnapTwo.coins + newCoinsValue;
+            firebase.database().ref('Users/' + to).set({
+                coins: saveCoinsToValueTwo
+            });
+        });
+        firebase.database().ref('Recents').set({
+            update: from + " transfered " + newCoinsValue + " Linguine Coins to " + to + " for " + forIt + "."
+        });
+    } else {
+        firebase.database().ref('Users/' + to).once('value').then(function(snapshot) {
+            var savedVarSnap = snapshot.val() || 'Anonymous';
+            var saveCoinsToValue = savedVarSnap.coins + newCoinsValue;
+            firebase.database().ref('Users/' + to).set({
+                coins: saveCoinsToValue
+            });
+        });
+        firebase.database().ref('Recents').set({
+            update: "The Bank" + " transfered " + newCoinsValue + " Linguine Coins to " + to + " for " + forIt + "."
+        });
+    }
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
+}
+function startAgain() {
+    firebase.database().ref('Price is Right/' + 'Guesses').remove();
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
+}
+function addToData() {
+    var nameOfProduct = document.getElementById('PirName').value;
+    var linkOfProduct = document.getElementById('PirInp').value;
+    firebase.database().ref('Price is Right').set({
+        name: nameOfProduct,
+        link: linkOfProduct
+    });
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
 }
