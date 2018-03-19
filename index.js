@@ -1,4 +1,3 @@
-//xp;VW%7A'EGUHFHN
 var config = {
     apiKey: 'AIzaSyBJlRXW9O6aAGBcZOvTMpiJUU6aOSc8STc',
     authDomain: 'linguine-coin.firebaseapp.com',
@@ -268,32 +267,40 @@ function toLuke() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Luke S for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Luke S for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toEamon() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -304,32 +311,40 @@ function toEamon() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Eamon for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Eamon for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toNathan() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -340,32 +355,40 @@ function toNathan() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Nathan for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Nathan for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toPaul() {
     var currentUserId = firebase.auth().currentUser.uid;
@@ -376,32 +399,40 @@ function toPaul() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Paul for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Paul for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toJason() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -412,32 +443,40 @@ function toJason() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jason for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jason for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toGavin() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -448,32 +487,40 @@ function toGavin() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Gavin Z for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Gavin Z for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toChance() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -484,32 +531,40 @@ function toChance() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Chance for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Chance for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toCarson() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -520,32 +575,40 @@ function toCarson() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Carson for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Carson for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toLukeV() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -556,32 +619,40 @@ function toLukeV() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Luke V for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Luke V for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toGavinR() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -592,32 +663,40 @@ function toGavinR() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Gavin R for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Gavin R for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toTyler() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -628,32 +707,40 @@ function toTyler() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Tyler for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Tyler for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toLiam() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -664,32 +751,40 @@ function toLiam() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Liam for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Liam for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toNiko() {
     var currentUserId = firebase.auth().currentUser.uid;
@@ -700,32 +795,40 @@ function toNiko() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Niko for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Niko for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toJacob() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -736,32 +839,40 @@ function toJacob() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jacob for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jacob for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toJackie() {
 	var currentUserId = firebase.auth().currentUser.uid;
@@ -772,32 +883,40 @@ function toJackie() {
 	var setUserFrom;
 	var currentUserCoins;
     var updates;
-	if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            setUserFrom = snapshot.val().coins || 'Anonymous';
-        });
-		//Add to Luke
-		firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
-			coins: setUserTo
-		});
-        firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
-            currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
-            var currentCoins = currentUserCoins - newAmount;
-            firebase.database().ref('Users/' + currentUserId).set({
-                coins: currentCoins
-            });
-        });
-        var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jackie for " + forDescription + ".";
-        firebase.database().ref('Recents/').once('value').then(function(snapshot) {
-            updates = snapshot.val() || 'Anonymous';
-            firebase.database().ref('Recents/').set({
-                update: stringForDescription
-            });
-        });
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-    }
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Jackie for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
 }
 function toDatabase() {
     firebase.database().ref('Price is Right/' + 'Guesses/' + firebase.auth().currentUser.uid).set({
