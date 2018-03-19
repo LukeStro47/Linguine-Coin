@@ -137,6 +137,7 @@ firebase.database().ref('Users').once('value').then(function(snapshot) {
     document.getElementById('niko-coins').innerHTML = userTwoOld.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins.toString() + ' Linguine Coins';
     document.getElementById('jacob-coins').innerHTML = userTwoOld.wzRqMSjNwqOtfk49jP849GCIYn63.coins.toString() + ' Linguine Coins';
     document.getElementById('jackie-coins').innerHTML = userTwoOld.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins.toString() + ' Linguine Coins';
+    document.getElementById('connor-coins').innerHTML = userTwoOld.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins.toString() + ' Linguine Coins';
 });
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
@@ -256,6 +257,8 @@ function checkForUser() {
         document.getElementById('jacob-div').style.display = 'none';
     } else if(currentUserId == 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3') {
         document.getElementById('jackie-div').style.display = 'none';
+    } else if(currentUserId == 'BXjYVwQA64ZmSJLtKcdsi1IinNr2') {
+        document.getElementById('connor-div').style.display = 'none';
     }
 }
 function toLuke() {
@@ -918,6 +921,50 @@ function toJackie() {
         }
     });
 }
+function toConnor() {
+	var currentUserId = firebase.auth().currentUser.uid;
+    var lukesCoins = oldUser.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins;
+    var forDescription = document.getElementById('connor-for').value;
+	var newAmount = parseInt(document.getElementById('connor-number').value);
+	var setUserTo = lukesCoins + newAmount;
+    var setUserFrom;
+	var currentUserCoins;
+    var updates;
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount > 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Connor for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
+}
 function toDatabase() {
     firebase.database().ref('Price is Right/' + 'Guesses/' + firebase.auth().currentUser.uid).set({
         guess: document.getElementById('modalInput').value
@@ -1167,6 +1214,12 @@ function submitStartBet() {
     firebase.database().ref('BetGame/' + 'Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63/' + 'teamTwo').set({
         bet: 0
     });
+    firebase.database().ref('BetGame/' + 'Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2/' + 'teamTwo').set({
+        bet: 0
+    });
     firebase.database().ref('BetGame/' + 'OverallBetOne').set({
         bet: 0
     });
@@ -1342,6 +1395,10 @@ function payoutBets() {
             firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
                 coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
             });
+            var checkSixteen = promptSave.BetGame.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
+                coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
+            });
         } else if(savedInput == promptSave.BetGame.allTwo) {
             var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamTwo.bet * 2;
             firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
@@ -1402,6 +1459,10 @@ function payoutBets() {
             var checkFifteen = promptSave.BetGame.Users.wzRqMSjNwqOtfk49jP849GCIYn63.teamTwo.bet * 2;
             firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
                 coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
+            });
+            var checkSixteen = promptSave.BetGame.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
+                coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
             });
         } else {
             alert("Invalid Response");
