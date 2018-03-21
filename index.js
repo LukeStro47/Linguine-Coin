@@ -273,7 +273,7 @@ function toLuke() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -317,7 +317,7 @@ function toEamon() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -361,7 +361,7 @@ function toNathan() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -405,7 +405,7 @@ function toPaul() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -449,7 +449,7 @@ function toJason() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -493,7 +493,7 @@ function toGavin() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -537,7 +537,7 @@ function toChance() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -581,7 +581,7 @@ function toCarson() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -625,7 +625,7 @@ function toLukeV() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -669,7 +669,7 @@ function toGavinR() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -713,7 +713,7 @@ function toTyler() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -757,7 +757,7 @@ function toLiam() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -801,7 +801,7 @@ function toNiko() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -845,7 +845,7 @@ function toJacob() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -889,7 +889,7 @@ function toJackie() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -933,7 +933,7 @@ function toConnor() {
     var setToTest;
     firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
         setToTest = snapshot.val() || 'Anonymous';
-        if(setToTest.coins - newAmount > 0) {
+        if(setToTest.coins - newAmount >= 0) {
             if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
                 firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
                     setUserFrom = snapshot.val().coins || 'Anonymous';
@@ -1019,38 +1019,42 @@ function createPot() {
     var goAtCoins;
     firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
         goAt = snapshot.val() || 'Anonymous';
-        //firebase.database().ref('Pot/' + 'Coins').once('value').then(function(snapshot) {
-            //goAtCoins = snapshot.val();
-            //var remember = goAtCoins.pot;
-            //var final = remember + potCoins.parseInt();
-        //});
-        if(potCoins > 0 && check == true) {
-            firebase.database().ref('Pot/').set({
-                creator: firebase.auth().currentUser.uid,
-                potName: potName,
-                coinsEntry: potCoins
+        if(goAt.coins - potCoins >= 0) {
+            //firebase.database().ref('Pot/' + 'Coins').once('value').then(function(snapshot) {
+                //goAtCoins = snapshot.val();
+                //var remember = goAtCoins.pot;
+                //var final = remember + potCoins.parseInt();
+            //});
+            if(potCoins > 0 && check == true) {
+                firebase.database().ref('Pot/').set({
+                    creator: firebase.auth().currentUser.uid,
+                    potName: potName,
+                    coinsEntry: potCoins
+                });
+            } else if(potCoins > 0 && check != true) {
+                firebase.database().ref('Pot/').set({
+                    creator: firebase.auth().currentUser.uid,
+                    potName: potName,
+                    coinsEntry: potCoins,
+                    password: potPassword
+                });
+            }
+            firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                coins: goAt.coins - potCoins
             });
-        } else if(potCoins > 0 && check != true) {
-            firebase.database().ref('Pot/').set({
-                creator: firebase.auth().currentUser.uid,
-                potName: potName,
-                coinsEntry: potCoins,
-                password: potPassword
+            firebase.database().ref('Pot' + 'Coins').set({
+                pot: potCoins
             });
+            firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
+                joined: true
+            });
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
+        } else {
+            alert("Insufficient Funds");
         }
-        firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
-            coins: goAt.coins - potCoins
-        });
     });
-    firebase.database().ref('Pot' + 'Coins').set({
-        pot: potCoins
-    });
-    firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
-        joined: true
-    });
-    setTimeout(function () {
-        location.reload();
-    }, 3000);
 }
 function potPassword() {
     var inputPass = document.getElementById('pot-pass').value;
@@ -1065,17 +1069,21 @@ function potPassword() {
             document.getElementById('potTwo').style.display = "block";
             document.getElementById('pot-name-two').innerHTML = save.Pot.potName;
             document.getElementById('pot-total').innerHTML = 'Current Pot: ' + save.PotCoins.pot.toString() + ' Linguine Coins';
-            firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
-                joined: true
-            });
             firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
                 saveInput = snapshot.val();
-                firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
-                    coins: saveInput.coins - save.Pot.coinsEntry
-                });
-            });
-            firebase.database().ref('PotCoins').set({
-                pot: saveEntry
+                if(saveInput.coins - save.Pot.coinsEntry >= 0) { 
+                    firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+                        coins: saveInput.coins - save.Pot.coinsEntry
+                    });
+                    firebase.database().ref('PotPlayers/' + firebase.auth().currentUser.uid).set({
+                        joined: true
+                    });
+                    firebase.database().ref('PotCoins').set({
+                        pot: saveEntry
+                    });
+                } else {
+                    alert("Insufficient Funds");
+                }
             });
         } else {
             alert("Wrong Password");
@@ -1259,7 +1267,7 @@ function teamOneBet() {
         firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
             var userCoinsNow = snapshot.val() || 'Anonymous';
             saveNewBet = userCoinsNow.coins - bet;
-            if(saveNewBet > 0) {
+            if(saveNewBet >= 0) {
                 firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
                     coins: saveNewBet
                 });
@@ -1298,7 +1306,7 @@ function teamTwoBet() {
         firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
             var userCoinsNow = snapshot.val() || 'Anonymous';
             saveNewBet = userCoinsNow.coins - bet;
-            if(saveNewBet > 0) {
+            if(saveNewBet >= 0) {
                 firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
                     coins: saveNewBet
                 });
