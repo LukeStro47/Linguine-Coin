@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>CSS Template</title>
+        <title>Linguine Coin</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
         <link rel="stylesheet" href="index.css">
+        <link rel="icon" href="https://lukestro.me/Linguine-Coin/LCoin.png">
         <style>
             * {
                 box-sizing: border-box;
@@ -243,14 +244,14 @@
                 <input type="text" placeholder="For" id="jacob-for">
                 <button onclick="toJacob()">Transfer</button>
             </div>
-            <div class="column" style="background-color:#aaa">
+            <div class="column" style="background-color:#aaa" id="heggan-div">
                 <img src="https://lukestro.me/Linguine-Coin/LCoin.png">
                 <h1>Mr. Heggan</h1>
                 <h4 id="heggan-coins">Loading...</h4>
                 <p></p>
-                <input type="number" placeholder="Number of Coins" min="0">
+                <input type="number" placeholder="Number of Coins" min="0" id="heggan-number">
                 <br>
-                <input type="text" placeholder="For">
+                <input type="text" placeholder="For" id="heggan-for">
                 <button>Transfer</button>
             </div>
         </div>

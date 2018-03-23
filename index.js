@@ -138,6 +138,7 @@ firebase.database().ref('Users').once('value').then(function(snapshot) {
     document.getElementById('jacob-coins').innerHTML = userTwoOld.wzRqMSjNwqOtfk49jP849GCIYn63.coins.toString() + ' Linguine Coins';
     document.getElementById('jackie-coins').innerHTML = userTwoOld.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins.toString() + ' Linguine Coins';
     document.getElementById('connor-coins').innerHTML = userTwoOld.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins.toString() + ' Linguine Coins';
+    document.getElementById('heggan-coins').innerHTML = userTwoOld.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins.toString() + ' Linguine Coins';
 });
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
@@ -259,6 +260,8 @@ function checkForUser() {
         document.getElementById('jackie-div').style.display = 'none';
     } else if(currentUserId == 'BXjYVwQA64ZmSJLtKcdsi1IinNr2') {
         document.getElementById('connor-div').style.display = 'none';
+    } else if(currentUserId == 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2') {
+        document.getElementById('heggan-div').style.display = 'none';
     }
 }
 function toLuke() {
@@ -965,6 +968,50 @@ function toConnor() {
         }
     });
 }
+function toHeggan() {
+	var currentUserId = firebase.auth().currentUser.uid;
+    var lukesCoins = oldUser.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins;
+    var forDescription = document.getElementById('heggan-for').value;
+	var newAmount = parseInt(document.getElementById('heggan-number').value);
+	var setUserTo = lukesCoins + newAmount;
+    var setUserFrom;
+	var currentUserCoins;
+    var updates;
+    var setToTest;
+    firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+        setToTest = snapshot.val() || 'Anonymous';
+        if(setToTest.coins - newAmount >= 0) {
+            if (newAmount > 0 && firebase.auth().currentUser.uid != null) {
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    setUserFrom = snapshot.val().coins || 'Anonymous';
+                });
+                //Add to Luke
+                firebase.database().ref('Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2').set({
+                    coins: setUserTo
+                });
+                firebase.database().ref('Users/' + currentUserId).once('value').then(function(snapshot) {
+                    currentUserCoins = (snapshot.val() && snapshot.val().coins) || 'Anonymous';
+                    var currentCoins = currentUserCoins - newAmount;
+                    firebase.database().ref('Users/' + currentUserId).set({
+                        coins: currentCoins
+                    });
+                });
+                var stringForDescription = currentUserId + " transferred " + newAmount.toString() + " Linguine Coins to Mr. Heggan for " + forDescription + ".";
+                firebase.database().ref('Recents/').once('value').then(function(snapshot) {
+                    updates = snapshot.val() || 'Anonymous';
+                    firebase.database().ref('Recents/').set({
+                        update: stringForDescription
+                    });
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }
+        } else {
+            alert("Insufficient Funds");
+        }
+    });
+}
 function toDatabase() {
     firebase.database().ref('Price is Right/' + 'Guesses/' + firebase.auth().currentUser.uid).set({
         guess: document.getElementById('modalInput').value
@@ -1228,6 +1275,12 @@ function submitStartBet() {
     firebase.database().ref('BetGame/' + 'Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2/' + 'teamTwo').set({
         bet: 0
     });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2/' + 'teamOne').set({
+        bet: 0
+    });
+    firebase.database().ref('BetGame/' + 'Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2/' + 'teamTwo').set({
+        bet: 0
+    });
     firebase.database().ref('BetGame/' + 'OverallBetOne').set({
         bet: 0
     });
@@ -1407,6 +1460,10 @@ function payoutBets() {
             firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
                 coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
             });
+            var checkSeventeen = promptSave.BetGame.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2').set({
+                coins: checkSeventeen + promptSave.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins
+            });
         } else if(savedInput == promptSave.BetGame.allTwo) {
             var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamTwo.bet * 2;
             firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
@@ -1472,6 +1529,147 @@ function payoutBets() {
             firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
                 coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
             });
+            var checkSeventeen = promptSave.BetGame.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.teamTwo.bet * 2;
+            firebase.database().ref('Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2').set({
+                coins: checkSeventeen + promptSave.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins
+            });
+        } else if(savedInput == "Hockey") {
+            var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
+                coins: checkOne + promptSave.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins
+            });
+            var checkTwo = promptSave.BetGame.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
+                coins: checkTwo + promptSave.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins
+            });
+            var checkThree = promptSave.BetGame.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
+                coins: checkThree + promptSave.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.coins
+            });
+            var checkFour = promptSave.BetGame.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
+                coins: checkFour + promptSave.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins
+            });
+            var checkFive = promptSave.BetGame.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
+                coins: checkFive + promptSave.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins
+            });
+            var checkSix = promptSave.BetGame.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
+                coins: checkSix + promptSave.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins
+            });
+            var checkSeven = promptSave.BetGame.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.teamTwo.bet;
+            firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
+                coins: checkSeven + promptSave.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins
+            });
+            var checkEight = promptSave.BetGame.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.teamTwo.bet;
+            firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
+                coins: checkEight + promptSave.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins
+            });
+            var checkNine = promptSave.BetGame.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+                coins: checkNine + promptSave.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins
+            });
+            var checkTen = promptSave.BetGame.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
+                coins: checkTen + promptSave.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins
+            });
+            var checkEleven = promptSave.BetGame.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
+                coins: checkEleven + promptSave.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins
+            });
+            var checkTwelve = promptSave.BetGame.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
+                coins: checkTwelve + promptSave.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.coins
+            });
+            var checkThirteen = promptSave.BetGame.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
+                coins: checkThirteen + promptSave.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins
+            });
+            var checkFourteen = promptSave.BetGame.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
+                coins: checkFourteen + promptSave.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins
+            });
+            var checkFifteen = promptSave.BetGame.Users.wzRqMSjNwqOtfk49jP849GCIYn63.teamTwo.bet;
+            firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
+                coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
+            });
+            var checkSixteen = promptSave.BetGame.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
+                coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
+            });
+            var checkOne = promptSave.BetGame.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.teamOne.bet;
+            firebase.database().ref('Users/' + 'Nv7UcjC551hX9cXLJ0aXhoINAKL2').set({
+                coins: checkOne + promptSave.Users.Nv7UcjC551hX9cXLJ0aXhoINAKL2.coins
+            });
+            var checkTwo = promptSave.BetGame.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.teamOne.bet;
+            firebase.database().ref('Users/' + 'gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2').set({
+                coins: checkTwo + promptSave.Users.gKzFFIGWfxPtqQ1FfV8gpGQ6O7O2.coins
+            });
+            var checkThree = promptSave.BetGame.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.teamOne.bet;
+            firebase.database().ref('Users/' + 'V9dkluL27TXX2xeAYKRAmULEWvS2').set({
+                coins: checkThree + promptSave.Users.V9dkluL27TXX2xeAYKRAmULEWvS2.coins
+            });
+            var checkFour = promptSave.BetGame.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.teamOne.bet;
+            firebase.database().ref('Users/' + 'Sfe4CqdALEZq2oqgyEHb3KousEJ2').set({
+                coins: checkFour + promptSave.Users.Sfe4CqdALEZq2oqgyEHb3KousEJ2.coins
+            });
+            var checkFive = promptSave.BetGame.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.teamOne.bet;
+            firebase.database().ref('Users/' + 'Nu3BMirKtKUziXS3nhDLtJraxOz1').set({
+                coins: checkFive + promptSave.Users.Nu3BMirKtKUziXS3nhDLtJraxOz1.coins
+            });
+            var checkSix = promptSave.BetGame.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.teamOne.bet;
+            firebase.database().ref('Users/' + 'Y6Gda6VmfmXewW2IWg7r4KXVE4M2').set({
+                coins: checkSix + promptSave.Users.Y6Gda6VmfmXewW2IWg7r4KXVE4M2.coins
+            });
+            var checkSeven = promptSave.BetGame.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.teamOne.bet;
+            firebase.database().ref('Users/' + 'X91iiHJqAucY1cAGhoCTo3Tq1ch1').set({
+                coins: checkSeven + promptSave.Users.X91iiHJqAucY1cAGhoCTo3Tq1ch1.coins
+            });
+            var checkEight = promptSave.BetGame.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.teamOne.bet;
+            firebase.database().ref('Users/' + 'L9oJ18itmrOXOAi4vhf6ahDHhHw1').set({
+                coins: checkEight + promptSave.Users.L9oJ18itmrOXOAi4vhf6ahDHhHw1.coins
+            });
+            var checkNine = promptSave.BetGame.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.teamOne.bet;
+            firebase.database().ref('Users/' + 'Qjn14k2LUYaYYrIxAQlZkRVa6fC3').set({
+                coins: checkNine + promptSave.Users.Qjn14k2LUYaYYrIxAQlZkRVa6fC3.coins
+            });
+            var checkTen = promptSave.BetGame.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.teamOne.bet;
+            firebase.database().ref('Users/' + 'C1Scy9IyO5On0iVmzBkcoiyFDlb2').set({
+                coins: checkTen + promptSave.Users.C1Scy9IyO5On0iVmzBkcoiyFDlb2.coins
+            });
+            var checkEleven = promptSave.BetGame.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.teamOne.bet;
+            firebase.database().ref('Users/' + 'fvztzfsKtgRnDCqrtrwbqv1uDJZ2').set({
+                coins: checkEleven + promptSave.Users.fvztzfsKtgRnDCqrtrwbqv1uDJZ2.coins
+            });
+            var checkTwelve = promptSave.BetGame.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.teamOne.bet;
+            firebase.database().ref('Users/' + 'j8h8tvQktlPmx4VioSplYmdpPmI2').set({
+                coins: checkTwelve + promptSave.Users.j8h8tvQktlPmx4VioSplYmdpPmI2.coins
+            });
+            var checkThirteen = promptSave.BetGame.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.teamOne.bet;
+            firebase.database().ref('Users/' + 'gnqvhAXj6YgCwmOlErvwEMtLAHX2').set({
+                coins: checkThirteen + promptSave.Users.gnqvhAXj6YgCwmOlErvwEMtLAHX2.coins
+            });
+            var checkFourteen = promptSave.BetGame.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.teamOne.bet;
+            firebase.database().ref('Users/' + 'DC2R4iIL67fkA6MrWubB3OOG0lS2').set({
+                coins: checkFourteen + promptSave.Users.DC2R4iIL67fkA6MrWubB3OOG0lS2.coins
+            });
+            var checkFifteen = promptSave.BetGame.Users.wzRqMSjNwqOtfk49jP849GCIYn63.teamOne.bet;
+            firebase.database().ref('Users/' + 'wzRqMSjNwqOtfk49jP849GCIYn63').set({
+                coins: checkFifteen + promptSave.Users.wzRqMSjNwqOtfk49jP849GCIYn63.coins
+            });
+            var checkSixteen = promptSave.BetGame.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.teamOne.bet;
+            firebase.database().ref('Users/' + 'BXjYVwQA64ZmSJLtKcdsi1IinNr2').set({
+                coins: checkSixteen + promptSave.Users.BXjYVwQA64ZmSJLtKcdsi1IinNr2.coins
+            });
+            var checkSeventeen = promptSave.BetGame.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.teamTwo.bet;
+            firebase.database().ref('Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2').set({
+                coins: checkSeventeen + promptSave.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins
+            });
+            var checkSeventeen = promptSave.BetGame.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.teamOne.bet * 2;
+            firebase.database().ref('Users/' + 'Djd5m3qVS5RlWfFx2Qe1EzkqEhA2').set({
+                coins: checkSeventeen + promptSave.Users.Djd5m3qVS5RlWfFx2Qe1EzkqEhA2.coins
+            });
         } else {
             alert("Invalid Response");
             payoutBets();
@@ -1482,7 +1680,7 @@ function payoutBets() {
         setTimeout(function () {
             location.reload();
         }, 2000);
-    }, 3000);
+    }, 4000);
 }
 function manualTransfer() {
     var from = document.getElementById('from-who').value;
