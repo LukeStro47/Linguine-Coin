@@ -24,6 +24,7 @@ var betUser;
 var newBetUser;
 var newBetUserTwo;
 var savedInput;
+var newUserTwo;
 var d = new Date();
 var c;
 var n = d.getDate();
@@ -35,20 +36,22 @@ var day = dt.getDate();
 var month = dt.getMonth();
 var year = month.toString() + day.toString();
 var newHolster;
-firebase.database().ref().once('value').then(function(snapshot) {
+/*firebase.database().ref().once('value').then(function(snapshot) {
     var holdValueNew = snapshot.val() || 'Anonymous';
-    if(holdValueNew.BetGame.Check.newDate.toString() == bc) {
-        firebase.database().ref('BetGame/' + 'Check').remove();
+    /*if(holdValueNew.BetGame.Check.newDate.toString() == bc) {
         c = bc;
         checkBetUser();
     } else if(holdValueNew.BetGame.Check.newDate == year) {
         c = year;
         checkBetUser();
-    } else {
+    } else if(holdValueNew.BetGame.Check == null) {
         c = ne.toString() + n.toString();
         checkBetUser();
     }
-});
+    c = holdValueNew.Check.newDate.toString();
+    console.log(holdValueNew.Check.newDate);
+    checkBetUser();
+});*/
 //var onlineUser = firebase.auth().currentUser.uid;
 function signMeIn() {
     var email = document.getElementById('email').value;
@@ -177,6 +180,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         firebase.database().ref('Users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
             newUser = snapshot.val() || 'Anonymous';
             document.getElementById('linguine-coins-my').innerHTML = newUser.coins.toString() + ' Linguine Coins';
+        });
+        firebase.database().ref('BetGame/' + 'Check/').once('value').then(function(snapshot) {
+            newUserTwo = snapshot.val();
+            console.log(newUserTwo);
+            c = newUserTwo.newDate;
+            checkBetUser();
         });
         checkForUser();
         startPotCheck();
