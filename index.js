@@ -27,8 +27,30 @@ var savedInput;
 var newUserTwo;
 var d = new Date();
 var c;
+var nc = d.getMinutes();
 var n = d.getDate();
 var ne = d.getMonth();
+if(nc == 0) {
+    nc = 00;
+} else if(nc == 1) {
+    nc = 01;
+} else if(nc == 2) {
+    nc = 02;
+} else if(nc == 3) {
+    nc = 03;
+} else if(nc == 4) {
+    nc = 04;
+} else if(nc == 5) {
+    nc = 05;
+} else if(nc ==6) {
+    nc = 06;
+} else if(nc == 7) {
+    nc = 07;
+} else if(nc == 8) {
+    nc = 08;
+} else if(nc == 9) {
+    nc = 09;
+}
 var bc = ne.toString() + n.toString();
 var y = d.setDate(d.getDate() - 1);
 var dt = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
@@ -87,11 +109,11 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-firebase.database().ref('NCAA').once('value').then(function(snapshot) {
+/*firebase.database().ref('NCAA').once('value').then(function(snapshot) {
     ncaaUser = snapshot.val().pot || 'Anonymous';
     document.getElementById('currentPot').innerHTML = 'Current Pot: ' + ncaaUser.toString() + ' Linguine Coins';
 });
-/*function checkNCAA() {
+function checkNCAA() {
     firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
         competitors = snapshot.val() || 'Anonymous';
         if(competitors.signedUp == true) {
@@ -227,7 +249,8 @@ function checkBetUser() {
                 document.getElementById('twoButton').style.display = "none";
             }
         });
-        if(newBetUser.fullTime < parseInt(d.getHours().toString() + d.getMinutes().toString()) && c == bc) {
+        console.log(nc);
+        if(newBetUser.fullTime < parseInt(d.getHours().toString() + nc.toString()) && c == bc) {
             firebase.database().ref('BetGame/' + 'Able').set({
                 accepting: false
             });
@@ -1064,7 +1087,7 @@ function toDatabase() {
     });
     modal.style.display = "none";
 }
-function runJoinNCAA() {
+/*function runJoinNCAA() {
     var goat;
     var goatCoins;
     var save;
@@ -1091,12 +1114,12 @@ function runJoinNCAA() {
                 });
                 location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
             });
-        }/* else {
+        } else {
             alert("You have already signed up. Redirecting you to the bracket page now.");
             location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
-        }*/
+        }
     });
-}
+}*/
 function createPot() {
     var potPassword;
     var potName = document.getElementById('pot-name').value;
@@ -1207,9 +1230,9 @@ function finalizeRemove() {
         location.reload();
     }, 3000);
 }
-function openNCAA() {
+/*function openNCAA() {
     location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
-}
+}*/
 function submitStartBet() {
     var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne').value;
     var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo').value;
