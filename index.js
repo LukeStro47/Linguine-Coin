@@ -31,25 +31,25 @@ var nc = d.getMinutes();
 var n = d.getDate();
 var ne = d.getMonth();
 if(nc == 0) {
-    nc = 00;
+    nc = "00";
 } else if(nc == 1) {
-    nc = 01;
+    nc = "01";
 } else if(nc == 2) {
-    nc = 02;
+    nc = "02";
 } else if(nc == 3) {
-    nc = 03;
+    nc = "03";
 } else if(nc == 4) {
-    nc = 04;
+    nc = "04";
 } else if(nc == 5) {
-    nc = 05;
+    nc = "05";
 } else if(nc ==6) {
-    nc = 06;
+    nc = "06";
 } else if(nc == 7) {
-    nc = 07;
+    nc = "07";
 } else if(nc == 8) {
-    nc = 08;
+    nc = "08";
 } else if(nc == 9) {
-    nc = 09;
+    nc = "09";
 }
 var bc = ne.toString() + n.toString();
 var y = d.setDate(d.getDate() - 1);
