@@ -16,7 +16,6 @@ var updatesList;
 var duoy;
 var checkTwso;
 var duoyTwo;
-var competitors;
 var userTwoOld;
 var ncaaUser;
 var overallUser;
@@ -83,6 +82,9 @@ function signMeIn() {
     }).then(function() {
         console.log(firebase.auth().currentUser.uid);
         document.getElementById('hide').style.display = 'none';
+        checkForUser();
+        startPotCheck();
+        checkNCAA();
     });
 }
 firebase.database().ref().once('value').then(function(snapshot) {
@@ -109,19 +111,20 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-/*firebase.database().ref('NCAA').once('value').then(function(snapshot) {
-    ncaaUser = snapshot.val().pot || 'Anonymous';
+firebase.database().ref('NCAA').once('value').then(function(snapshot) {
+    ncaaUser = snapshot.val().pot;
     document.getElementById('currentPot').innerHTML = 'Current Pot: ' + ncaaUser.toString() + ' Linguine Coins';
 });
 function checkNCAA() {
-    firebase.database().ref('Competition/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
-        competitors = snapshot.val() || 'Anonymous';
-        if(competitors.signedUp == true) {
+    firebase.database().ref('Competition').once('value').then(function(snapshot) {
+        var competitors = snapshot.val();
+        if(competitors[firebase.auth().currentUser.uid].signedUp == true) {
             document.getElementById('joinNCAA').style.display = "none";
             document.getElementById('joinNCAAR').style.display = "block";
+            console.log("elo");
         }
     });
-}*/
+}
 firebase.database().ref().once('value').then(function(snapshot) {
     overallUser = snapshot.val() || 'Anonymous';
     if(overallUser.Pot != null) {
@@ -211,7 +214,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
         checkForUser();
         startPotCheck();
-        //checkNCAA();
+        checkNCAA();
         //checkBetUser();
         if(firebase.auth().currentUser.uid == "Nv7UcjC551hX9cXLJ0aXhoINAKL2") {
             document.getElementById('manual').style.display = "block";
@@ -1087,7 +1090,7 @@ function toDatabase() {
     });
     modal.style.display = "none";
 }
-/*function runJoinNCAA() {
+function runJoinNCAA() {
     var goat;
     var goatCoins;
     var save;
@@ -1101,7 +1104,7 @@ function toDatabase() {
                 firebase.database().ref('NCAA/').once('value').then(function(snapshot) {
                     goatCoins = snapshot.val();
                     var remember = goatCoins.pot;
-                    var final = remember + 20;
+                    var final = remember + 50;
                     firebase.database().ref('NCAA').set({
                         pot: final
                     });
@@ -1110,16 +1113,16 @@ function toDatabase() {
                     signedUp: true
                 });
                 firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
-                    coins: goat.coins - 20
+                    coins: goat.coins - 50
                 });
-                location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
+                location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
             });
         } else {
             alert("You have already signed up. Redirecting you to the bracket page now.");
-            location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
+            location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
         }
     });
-}*/
+}
 function createPot() {
     var potPassword;
     var potName = document.getElementById('pot-name').value;
@@ -1230,9 +1233,9 @@ function finalizeRemove() {
         location.reload();
     }, 3000);
 }
-/*function openNCAA() {
-    location.replace("https://bracketchallenge.ncaa.com/picks/group/735352?iid=bcg_share_web_other_group_copy");
-}*/
+function openNCAA() {
+    location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
+}
 function submitStartBet() {
     var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne').value;
     var teamTwo = document.getElementById('teamTwoCity').value + ' ' + document.getElementById('teamTwo').value;
