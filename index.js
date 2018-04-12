@@ -1104,7 +1104,7 @@ function runJoinNCAA() {
                 firebase.database().ref('NCAA/').once('value').then(function(snapshot) {
                     goatCoins = snapshot.val();
                     var remember = goatCoins.pot;
-                    var final = remember + 50;
+                    var final = remember + 80;
                     firebase.database().ref('NCAA').set({
                         pot: final
                     });
@@ -1113,13 +1113,13 @@ function runJoinNCAA() {
                     signedUp: true
                 });
                 firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
-                    coins: goat.coins - 50
+                    coins: goat.coins - 80
                 });
-                location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
+                location.replace("https://nba.com/playoffs/bracketchallenge/#league/standings/12098?code=DXHMCYHZ");
             });
         } else {
             alert("You have already signed up. Redirecting you to the bracket page now.");
-            location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
+            location.replace("https://nba.com/playoffs/bracketchallenge/#league/standings/12098?code=DXHMCYHZ");
         }
     });
 }
@@ -1233,8 +1233,11 @@ function finalizeRemove() {
         location.reload();
     }, 3000);
 }
-function openNCAA() {
+function openNCAAT() {
     location.replace("https://bracketchallenge.nhl.com/leagues/linguine-coin?share_league=1");
+}
+function openNCAA() {
+    loaction.replace("https://nba.com/playoffs/bracketchallenge/#league/standings/12098?code=DXHMCYHZ");
 }
 function submitStartBet() {
     var teamOne = document.getElementById('teamOneCity').value + ' ' + document.getElementById('teamOne').value;
